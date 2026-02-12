@@ -12,10 +12,32 @@ Para mas contexto, revisa estos archivos en el repo:
 - `REPORT-agent-teams-analysis.md` - Analisis completo con matrices de decision
 - `use-cases/build-with-agent-team/TRANSCRIPT-agent-teams-video.md` - Transcript del video explicativo
 
+## Sobre el Repositorio
+
+Este repo es un fork de `coleam00/context-engineering-intro` (Cole Medin).
+Nuestro fork esta en `Ginagori/context-engineering-intro`.
+
+| Remote | URL | Uso |
+|--------|-----|-----|
+| `origin` | https://github.com/Ginagori/context-engineering-intro.git | Nuestro fork - aqui hacemos push |
+| `upstream` | https://github.com/coleam00/context-engineering-intro.git | Repo de Cole - solo lectura |
+
 ## Paso 1: Clonar el Fork (si no lo tienes)
 
 ```bash
 git clone https://github.com/Ginagori/context-engineering-intro.git
+cd context-engineering-intro
+git remote add upstream https://github.com/coleam00/context-engineering-intro.git
+```
+
+Verifica que los remotes quedaron bien:
+```bash
+git remote -v
+# Deberia mostrar:
+# origin    https://github.com/Ginagori/context-engineering-intro.git (fetch)
+# origin    https://github.com/Ginagori/context-engineering-intro.git (push)
+# upstream  https://github.com/coleam00/context-engineering-intro.git (fetch)
+# upstream  https://github.com/coleam00/context-engineering-intro.git (push)
 ```
 
 ## Paso 2: Habilitar Agent Teams
@@ -99,14 +121,49 @@ Primero crea un plan en markdown, luego:
 | Code review exhaustivo | **Agent Teams** |
 | Research de librerias | Sub Agents + Context7 |
 
-## Obtener Actualizaciones de Cole
+## Gestion del Repositorio
 
-El repo original de Cole esta configurado como `upstream`. Para traer sus actualizaciones:
+### Obtener Actualizaciones de Cole
+
+Cole sigue actualizando su repo original. Para traer sus cambios a nuestro fork:
 
 ```bash
+# 1. Traer los cambios de Cole (no modifica nada local)
 git fetch upstream
+
+# 2. Asegurarte de estar en main
+git checkout main
+
+# 3. Mergear los cambios de Cole a tu main local
 git merge upstream/main
+
+# 4. Si hay conflictos, resolverlos y luego:
+#    git add .
+#    git commit -m "Merge upstream updates from Cole"
+
+# 5. Subir al fork de Ginagori para que ambos lo tengan
 git push origin main
+```
+
+### Flujo de trabajo normal
+
+```bash
+# Trabajar normalmente
+git add <archivos>
+git commit -m "mensaje"
+git push origin main          # Sube a nuestro fork (Ginagori)
+
+# NUNCA hacer push a upstream (repo de Cole)
+# git push upstream  <-- NO HACER ESTO
+```
+
+### Si clonaste el repo de Cole directamente (en vez del fork)
+
+Si ya tenias el repo clonado desde `coleam00`, cambia el remote:
+```bash
+git remote set-url origin https://github.com/Ginagori/context-engineering-intro.git
+git remote add upstream https://github.com/coleam00/context-engineering-intro.git
+git remote -v  # Verificar
 ```
 
 ## Notas Importantes

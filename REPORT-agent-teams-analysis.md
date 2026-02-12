@@ -372,3 +372,42 @@ La clave es que Playbook y Agent Teams operan en **capas diferentes**:
 | Crear workflow n8n | Agent Teams (2) o Single | Medio | n8n |
 | Documentar decisiones | Single + Obsidian | Bajo | Obsidian |
 | Proyecto nuevo completo | Playbook -> Teams -> Playbook | Alto | Todos |
+
+---
+
+## 11. Gestion del Repositorio
+
+### Estructura de Remotes
+
+Este repo es un fork de Cole Medin. Los remotes estan configurados asi:
+
+| Remote | URL | Uso |
+|--------|-----|-----|
+| `origin` | https://github.com/Ginagori/context-engineering-intro.git | Fork de Nivanta - push/pull |
+| `upstream` | https://github.com/coleam00/context-engineering-intro.git | Repo original de Cole - solo lectura |
+
+### Sincronizar con Actualizaciones de Cole
+
+Cole sigue actualizando el repo original con nuevos skills, ejemplos y mejoras.
+Para traer esas actualizaciones a nuestro fork:
+
+```bash
+# 1. Traer los cambios de Cole (descarga pero no modifica nada local)
+git fetch upstream
+
+# 2. Mergear los cambios de Cole en nuestro main
+git merge upstream/main
+
+# 3. Si hay conflictos: resolver, git add, git commit
+# 4. Subir al fork para que todo el equipo lo tenga
+git push origin main
+```
+
+**Que hace cada comando:**
+- `git fetch upstream`: Descarga los commits nuevos del repo de Cole a tu maquina.
+  No cambia tus archivos, solo actualiza la referencia `upstream/main`.
+- `git merge upstream/main`: Toma esos commits descargados y los integra en tu
+  branch actual (main). Si Cole modifico archivos que tu tambien modificaste,
+  puede haber conflictos que debes resolver manualmente.
+
+**Frecuencia recomendada:** Cada 1-2 semanas o cuando Cole publique un video nuevo.
